@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_height_large" >
+    
+    <ImageView 
+        android:id="@+id/itemImage"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:src="@drawable/ic_launcher"
+	    android:scaleType="centerCrop" />
+    
+	<com.tspoon.teksyndicate.assets.TextViewFonted 
+	    android:id="@+id/itemTitle"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+	    android:layout_alignParentBottom="true"
+	    android:layout_margin="@dimen/title_margin"
+	    android:textSize="@dimen/text_size_title"
+	    android:textColor="@android:color/white" />
+	
+	
+</RelativeLayout>

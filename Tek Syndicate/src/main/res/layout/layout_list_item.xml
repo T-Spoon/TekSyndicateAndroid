@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_height"
+    android:orientation="horizontal" >
+    
+	<com.tspoon.teksyndicate.assets.TextViewFonted 
+	    android:id="@+id/itemTitle"
+	    android:layout_width="0dp"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="0.6"
+	    android:layout_gravity="top"
+	    android:layout_margin="@dimen/title_margin"
+	    android:textSize="@dimen/text_size_title" />
+	
+	<ImageView 
+	    android:id="@+id/itemImage"
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:layout_weight="0.4"
+	    android:src="@drawable/ic_logo_grey"
+	    android:scaleType="centerCrop"
+	    />
+</LinearLayout>

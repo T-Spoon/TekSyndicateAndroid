@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="@string/pref_key_general"
+        android:title="@string/pref_title_general" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_store_images"
+            android:title="@string/pref_title_store_images" 
+            android:summary="@string/pref_summary_store_images" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
