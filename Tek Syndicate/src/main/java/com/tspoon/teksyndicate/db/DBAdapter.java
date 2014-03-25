@@ -30,17 +30,19 @@ public class DBAdapter {
 		Log.d(TAG, "getVideoFeed");
 		return new Select()
 				.from(VideoItem.class)
+                .orderBy("Position")
 				.execute();
 	}
 	
-	public static VideoItem getVideo(int id) {
+	public static VideoItem getVideo(String token) {
 		return new Select()
 				.from(VideoItem.class)
-				.where("VideoID = ?", id)
+				.where("VideoToken = ?", token)
 				.executeSingle();
 	}
 
 	public static void popuplateVideosFromJSON(JSONArray items) {
+        System.out.println("popuplateVideoFromJSON");
 		ActiveAndroid.beginTransaction();
 		try {
 			for (int i = 0; i < items.length(); i++) {
@@ -50,8 +52,10 @@ public class DBAdapter {
 				item.videoToken = object.getJSONObject("resourceId").getString("videoId");
 				item.datePublished = object.getString("publishedAt");
 				item.imageURL = object.getJSONObject("thumbnails").getJSONObject("high").getString("url");
+                item.position = object.getInt("position");
                 item.itemViewed = 0;
 				item.save();
+
 			}
 			ActiveAndroid.setTransactionSuccessful();
 		} catch (JSONException e) {
@@ -70,7 +74,7 @@ public class DBAdapter {
 	public static void insertCategories() {
 		if(getCategories().size() == 0) {
 			ActiveAndroid.beginTransaction();
-			String[] categoryNames = new String[] { "Tek Syndicate", "Uploads", "The Tek" }; 
+			String[] categoryNames = new String[] { "Tek Syndicate", "The Tek", "Inbox" };
 			try {
 				for(int i = 0; i < categoryNames.length; i++) {
 					Category c = new Category(i + 1, categoryNames[i]);

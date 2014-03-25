@@ -16,7 +16,7 @@ public class ActivityVideoView extends YouTubeBaseActivity implements YouTubePla
 	
 	private static final String TAG = "ActivityVideoView";
 	
-	public static final String BUNDLE_VIDEO_ID = "VideoID";
+	public static final String BUNDLE_VIDEO_TOKEN = "Video_Token";
 	
 	private VideoItem mItem;
 	private VideoView mVideo;
@@ -28,8 +28,8 @@ public class ActivityVideoView extends YouTubeBaseActivity implements YouTubePla
 		setContentView(R.layout.activity_view);
 		
 		Bundle bundle = getIntent().getExtras();
-		int videoID = bundle.getInt(BUNDLE_VIDEO_ID);
-		mItem = DBAdapter.getVideo(videoID);
+		String videoToken = bundle.getString(BUNDLE_VIDEO_TOKEN);
+		mItem = DBAdapter.getVideo(videoToken);
 		
 		//mItem = new VideoItem(videoID, "Tek Syndicate Outtakes & Shenanigans | CES 2014", "Ow1a_NnPvEM", "14 Jan 2014", "");
 		mPlayer = (YouTubePlayerView) findViewById(R.id.youtubePlayer);
@@ -46,6 +46,7 @@ public class ActivityVideoView extends YouTubeBaseActivity implements YouTubePla
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        Log.d(TAG, "Playing Video: " + mItem.title);
         youTubePlayer.cueVideo(mItem.videoToken);
         youTubePlayer.play();
     }

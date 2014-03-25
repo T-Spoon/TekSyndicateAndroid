@@ -9,13 +9,10 @@ public class VideoItem extends Model implements DBItem {
 
 	public static final String WATCH_URL = "http://gta-5-map.com/TekSyndicate/";
 	
-	@Column(name = "VideoID", index = true)
-	public int id;
-	
 	@Column(name = "Title")
 	public String title;
 
-	@Column(name = "VideoToken")
+	@Column(name = "VideoToken", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
 	public String videoToken;
 
 	@Column(name = "DatePublished")
@@ -27,18 +24,21 @@ public class VideoItem extends Model implements DBItem {
     @Column(name = "Viewed")
     public int itemViewed;
 
+    @Column(name = "Position")
+    public int position;
+
 	public VideoItem(){
 		super();
 	}
 
-	public VideoItem(int id, String title, String videoToken, String datePublished, String imageURL, int itemViewed) {
+	public VideoItem(String title, String videoToken, String datePublished, String imageURL, int itemViewed, int position) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.videoToken = videoToken;
 		this.datePublished = datePublished;
 		this.imageURL = imageURL;
         this.itemViewed = itemViewed;
+        this.position = position;
 	}
 	
 	public static String getVideoURL(String token) {

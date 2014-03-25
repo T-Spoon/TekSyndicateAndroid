@@ -8,8 +8,9 @@ import android.content.SharedPreferences.Editor;
 public class SettingsHelper {
 
     private static final String APP_SHARED_PREFS 	= SettingsHelper.class.getSimpleName();
-	private static final String NEXT_PAGE_UPLOADS 	= "video_extension";
+	private static final String NEXT_PAGE_UPLOADS 	= "next_page_token";
 	private static final String DATABASE_CREATED	= "database_created";
+    private static final String NUM_VIDEOS	        = "video_count";
     
     private static SettingsHelper mInstance = null;
     
@@ -46,6 +47,14 @@ public class SettingsHelper {
     public void setDatabaseCreated() {
     	editor.putBoolean(DATABASE_CREATED, true);
     	editor.commit();
+    }
+
+    public int getNumVideos() {
+        return preferences.getInt(NUM_VIDEOS, -1);
+    }
+    public void setNumVideos(int numVideos) {
+        editor.putInt(NUM_VIDEOS, numVideos);
+        editor.commit();
     }
     
     public boolean getDatabaseCreated() {

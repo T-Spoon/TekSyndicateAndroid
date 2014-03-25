@@ -43,7 +43,7 @@ public class ActivityFeed extends ActionBarActivity {
 
         mMenu = new SlidingMenu(this);
         mMenu.setMode(SlidingMenu.LEFT);
-        mMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        mMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
         mMenu.setShadowWidthRes(R.dimen.shadow_width);
         mMenu.setShadowDrawable(R.drawable.menu_shadow);
         mMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);

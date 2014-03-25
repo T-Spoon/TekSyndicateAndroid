@@ -138,7 +138,7 @@ public class FeedPagerAdapter extends FragmentStatePagerAdapter {
 	        DBAdapter.setItemViewed(item, 1);
 
 	        Intent i = new Intent(v.getContext(), ActivityVideoView.class);
-	        i.putExtra(ActivityVideoView.BUNDLE_VIDEO_ID, item.id);
+	        i.putExtra(ActivityVideoView.BUNDLE_VIDEO_TOKEN, item.videoToken);
 	        startActivity(i);
 	    }
 	    
@@ -180,10 +180,21 @@ public class FeedPagerAdapter extends FragmentStatePagerAdapter {
 	private Response.Listener<JSONObject> volleySuccessListener = new Response.Listener<JSONObject>() {
 		@Override
 		public void onResponse(JSONObject json) {
-			Log.d(VOLLEY_TAG, json.toString());
+			//Log.d(VOLLEY_TAG, json.toString());
 			try {
 				DBAdapter.popuplateVideosFromJSON(json.getJSONArray("items"));
-				mSettings.setNextPageToken(json.getString("nextPageToken"));
+                int numVideos = json.getJSONObject("pageInfo").getInt("totalResults");
+                int prevNumVideos = mSettings.getNumVideos();
+
+                // If the playlist has been modified, invalidate the pageToken and start again
+                Log.d(VOLLEY_TAG, "Video Count: " + numVideos + " vs " + prevNumVideos);
+                if(numVideos != prevNumVideos) {
+                    mSettings.setNumVideos(numVideos);
+                    mSettings.setNextPageToken("");
+                } else {
+                    mSettings.setNextPageToken(json.getString("nextPageToken"));
+                }
+
 				updateView();
 			} catch (JSONException e) {
 				e.printStackTrace();
